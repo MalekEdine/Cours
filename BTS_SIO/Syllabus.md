@@ -5,7 +5,6 @@
 - **Durée :** 10 semaines (1er semestre)
 - **Niveau :** BTS SIO (Option SISR)
 - **Crédits :** 4 ECTS
-- **Enseignant :** [Nom de l'enseignant]
 
 ---
 
