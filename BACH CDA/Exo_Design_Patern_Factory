@@ -1,0 +1,146 @@
+### **Énoncé : Projet Tower Defense - Design Pattern Factory**
+
+---
+
+#### **Contexte**
+Le but du jeu est de protéger une base contre des vagues d’ennemis en construisant des tours. Chaque tour a des caractéristiques spécifiques (portée, dégâts, coût) et peut attaquer les ennemis à portée. Si un ennemi atteint la base, celle-ci perd des points de vie. Le jeu s’arrête lorsque tous les ennemis sont vaincus ou lorsque la base est détruite.
+
+---
+
+### **Objectifs pédagogiques**
+1. Comprendre et appliquer le **design pattern Factory** pour simplifier la création d’objets.
+2. Mettre en œuvre les concepts d’**héritage** et de **polymorphisme** pour gérer des comportements spécifiques.
+3. Créer une **interface utilisateur interactive** en mode console avec **Scanner**.
+4. Structurer un programme en plusieurs classes respectant les principes d’orienté objet.
+
+---
+
+### **Spécifications du jeu**
+
+#### **1. Classes principales**
+1. **Tour (classe abstraite)**  
+   - Attributs : `nom`, `portee`, `degats`, `cout`.
+   - Méthodes :
+     - `attaquer(Ennemi ennemi)` (méthode abstraite) : Chaque type de tour attaque un ennemi de manière spécifique.
+     - `afficherStatistiques()` : Affiche les caractéristiques de la tour.
+
+2. **Sous-classes de Tour**  
+   - `TourArcher` :
+     - Portée : 5
+     - Dégâts : 10
+     - Coût : 50
+     - Attaque : "La Tour Archer tire une flèche !"
+   - `TourMage` :
+     - Portée : 4
+     - Dégâts : 15
+     - Coût : 75
+     - Attaque : "La Tour Mage lance un sort de feu !"
+   - `TourCanon` :
+     - Portée : 3
+     - Dégâts : 20
+     - Coût : 100
+     - Attaque : "La Tour Canon tire un boulet explosif !"
+
+3. **Ennemi**
+   - Attributs : `nom`, `pv`, `position`.
+   - Méthodes :
+     - `avancer()` : L’ennemi avance vers la base en diminuant sa position.
+     - `subirDegats(int degats)` : L’ennemi perd des points de vie.
+     - `estMort()` : Retourne `true` si les PV sont à 0 ou moins.
+
+4. **TourFactory**
+   - Méthode : `creerTour(String type)` :
+     - Retourne une instance de `TourArcher`, `TourMage` ou `TourCanon` en fonction du type passé en paramètre.
+
+#### **2. Règles du jeu**
+1. **Départ du jeu** :
+   - Le joueur commence avec :
+     - `200 or` (ressource pour construire des tours).
+     - `100 points de vie` pour la base.
+     - Une liste d’ennemis générés automatiquement.
+2. **Déroulement du jeu** :
+   - À chaque tour, le joueur choisit une action :
+     - Construire une tour (si l’or est suffisant).
+     - Afficher les caractéristiques des tours construites.
+     - Lancer une attaque sur les ennemis.
+     - Afficher la liste des ennemis et leurs PV.
+     - Finir le tour, ce qui fait avancer les ennemis.
+   - Les ennemis avancent vers la base. S’ils atteignent la position 0, la base perd 10 points de vie par ennemi.
+3. **Fin du jeu** :
+   - Le joueur gagne si tous les ennemis sont éliminés.
+   - Le joueur perd si les points de vie de la base atteignent 0.
+
+---
+
+### **Contraintes techniques**
+1. **Factory Pattern** :
+   - Implémentez une classe `TourFactory` pour gérer la création des tours.
+   - La méthode `creerTour(String type)` doit retourner une instance de `TourArcher`, `TourMage` ou `TourCanon`.
+2. **Héritage** :
+   - La classe `Tour` doit être abstraite et posséder des méthodes spécifiques dans ses sous-classes.
+3. **Interface utilisateur** :
+   - Utilisez la classe `Scanner` pour permettre au joueur de choisir ses actions.
+   - Affichez les choix possibles dans un menu interactif à chaque tour.
+
+---
+
+### **Étapes de développement**
+
+1. **Création des classes de base** :
+   - Implémentez les classes `Tour`, `TourArcher`, `TourMage`, `TourCanon`, et `Ennemi`.
+   - Ajoutez une classe `TourFactory` pour gérer la création des tours.
+
+2. **Gestion des ennemis** :
+   - Implémentez les comportements des ennemis (`avancer`, `subirDegats`, `estMort`).
+   - Générez une liste d’ennemis au début du jeu (par exemple : Gobelin, Troll, Dragon).
+
+3. **Interface utilisateur** :
+   - Affichez un menu pour permettre au joueur de :
+     - Construire une tour.
+     - Voir les tours disponibles.
+     - Lancer une attaque.
+     - Finir le tour.
+
+4. **Gameplay** :
+   - Gérez les actions des ennemis à la fin de chaque tour.
+   - Détectez la condition de victoire ou de défaite.
+
+---
+
+### **Exemple d’interface console**
+
+```plaintext
+--- MENU ---
+1. Construire une tour
+2. Afficher les tours
+3. Attaquer les ennemis
+4. Voir les ennemis
+5. Fin du tour
+Or disponible : 150, Points de vie de la base : 90
+Choisissez une option : 1
+
+Choisissez une tour à construire : ARCHER, MAGE, CANON
+> ARCHER
+Tour Archer construite !
+```
+
+---
+
+### **Critères d’évaluation**
+1. Respect des principes d’orienté objet :
+   - Utilisation correcte de l’héritage et du polymorphisme.
+   - Encapsulation des comportements spécifiques dans les sous-classes.
+2. Utilisation du design pattern Factory pour la création des tours.
+3. Fonctionnalité complète du jeu (menu interactif, attaques, gestion des ennemis).
+4. Robustesse du code :
+   - Gestion des erreurs (entrée utilisateur invalide, or insuffisant, etc.).
+   - Code lisible et bien structuré.
+
+---
+
+### **Bonus**
+1. Ajoutez la possibilité d’améliorer les tours (augmenter dégâts ou portée contre de l’or).
+2. Implémentez des types d’ennemis différents (ennemis volants, rapides).
+3. Ajoutez des vagues successives d’ennemis avec une difficulté croissante.
+
+---
