@@ -256,7 +256,7 @@ Paiement de 200.0€ en cryptomonnaie.
 2. **Création d’éléments d’interface utilisateur (boutons, menus).**
 3. **Gestion des ressources (chargement d’images, sons, fichiers).**
 4. **Jeux vidéo** :
-   - Création d’unités, de personnages ou d’objets 
+   - Création d’unités, de personnages ou d’objets divers
 
 ---
 
